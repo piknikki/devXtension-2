@@ -1,6 +1,12 @@
 const express = require('express'); // import express
 
+// import db connection from db.js
+const connectDB = require('./config/db');
+
 const app = express();  // use express as app
+
+// connect database from above
+connectDB();
 
 app.get("/", (req, res) => {
     res.send("API running"); // puts the message in the window
