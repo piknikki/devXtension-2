@@ -4,13 +4,13 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validationResult } = require('express-validator'); // add /check to end
+const { check, validationResult } = require('express-validator');
 const User = require('../../models/User'); // import the user
 
 // post route for new users
 // @route     POST api/users
 // @desc      Register user
-// @access    Public  --- (no token)
+// @access    Public
 // add second paramter (array) as middleware, checking isEmail and isLength
 router.post('/', [
         check('name', 'Name is required').not().isEmpty(),
@@ -24,7 +24,9 @@ router.post('/', [
     // console.log(req.body); // logs to back end when sent through postman
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() }); // send error as json
+            return res
+                .status(400)
+                .json({ errors: errors.array() }); // send error as json
         }
 
         const { name, email, password } = req.body; // destructure the body
@@ -35,7 +37,9 @@ router.post('/', [
             let user = await User.findOne({ email });
 
             if (user) {
-                return res.status(400).json({ errors: [ { msg: 'User already exists' } ] })
+                return res
+                    .status(400)
+                    .json({ errors: [ { msg: 'User already exists' } ] });
             }
 
             // get user's gravatar -- pass user's email into method with options
@@ -84,8 +88,5 @@ router.post('/', [
             res.status(500).send('server error')
         }
 });
-
-
-
 
 module.exports = router;
