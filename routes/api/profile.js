@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
-// @route     GET api/profile/me --- my profile
+// @route     GET api/profile/me
 // @desc      get current user profile
 // @access    Private --- need middleware, add as second param into route
 router.get('/me', auth, async (req, res) => {
@@ -30,7 +30,7 @@ router.get('/me', auth, async (req, res) => {
 });
 
 
-// @route     POST api/profile/
+// @route     POST api/profile
 // @desc      create or update user profile
 // @access    Private --- need middleware, add as second param into route
 router.post('/',
@@ -75,10 +75,10 @@ router.post('/',
         if (status) profileFields.status = status;
         if (githubusername) profileFields.githubusername = githubusername;
         if (skills) {profileFields.skills = skills.split(', ').map(skill => skill.trim())
-        };
+        }
 
         // build social object
-        profileFields.social = {}
+        profileFields.social = {};
         if (youtube) profileFields.social.youtube = youtube;
         if (facebook) profileFields.social.facebook = facebook;
         if (twitter) profileFields.social.twitter = twitter;
@@ -110,7 +110,46 @@ router.post('/',
             console.log(err.message);
             res.status(500).send('server error')
         }
-
  });
+
+
+// @route     GET api/profile
+// @desc      get all profiles
+// @access    Public
+router.get("/", async (req, res) => {
+    try {
+        // populate from the user collection, add array of name and avatar
+        const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+        res.json(profiles);
+
+    } catch (error) {
+        console.error(err.message);
+        res.status(500).send('Server Error')
+    }
+});
+
+
+// @route     GET api/profile/user/:user_id
+// @desc      get profile by user id
+// @access    Public
+// when there's a colon in the route, use params instead of body or other
+router.get("/user/:user_id", async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
+
+        if (!profile) return res.status(400).json({ msg: 'Profile not found' });
+        res.json(profile);
+    } catch (error) {
+        console.error(err.message);
+
+        // check for error where there is no such id number
+        if(err.kind === 'ObjectId') {
+            return res.status(400).json({ msg: 'Profile not found' });
+        }
+        res.status(500).send('Server Error')
+    }
+});
+
+
 
 module.exports = router;
