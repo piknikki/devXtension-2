@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://adminnikki:adminnikki@devxtension-2y520.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://adminnikki:adminnikki@devxtension-2y520.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "kittensinmittens"
 }

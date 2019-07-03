@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 const { check, validationResult } = require('express-validator'); // add /check to end
 const User = require('../../models/User'); // import the user
 
@@ -33,7 +35,7 @@ router.post('/', [
             let user = await User.findOne({ email });
 
             if (user) {
-                res.status(400).json({ errors: [ { msg: 'User already exists' } ] })
+                return res.status(400).json({ errors: [ { msg: 'User already exists' } ] })
             }
 
             // get user's gravatar -- pass user's email into method with options
@@ -59,10 +61,24 @@ router.post('/', [
             await user.save(); // saves user
 
             // return jsonwebtoken (logs user in right away)
+            // create payload, which has user id
+            const payload = {
+                user: {
+                    id: user.id // created by mongodb, and mongoose removes the underscore
+                }
+            };
 
-
-            res.send('User registered!'); // sends this message back to postman
-
+            // change expiresIn to 3600 when in production
+            jwt.sign(
+                payload,
+                config.get('jwtSecret'),
+                { expiresIn: 360000 },
+                (err, token) => {
+                    if(err) throw err;
+                    res.json({ token })
+                }
+            );
+            // res.send('User registered!'); // sends this message back to postman -- for testing
         } catch(err) {
             console.error(err.message)
             res.status(500).send('server error')
