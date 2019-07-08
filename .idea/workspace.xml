@@ -20,6 +20,8 @@
       <change beforePath="$PROJECT_DIR$/../../../Tutoring/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Tutoring/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Tutoring/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Tutoring/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Tutoring/story/chapter1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/default.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/profile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../reproductions/css/1024.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../reproductions/css/480.css" beforeDir="false" />
@@ -73,8 +75,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/api/profile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1249">
-              <caret line="342" lean-forward="true" selection-start-line="342" selection-end-line="342" />
+            <state relative-caret-position="534">
+              <caret line="376" column="19" lean-forward="true" selection-start-line="376" selection-start-column="19" selection-end-line="376" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/default.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="4" column="23" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -134,12 +145,12 @@
         <option value="$PROJECT_DIR$/routes/api/posts.js" />
         <option value="$PROJECT_DIR$/models/User.js" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/config/default.json" />
         <option value="$PROJECT_DIR$/middleware/auth.js" />
         <option value="$PROJECT_DIR$/routes/api/auth.js" />
         <option value="$PROJECT_DIR$/routes/api/users.js" />
         <option value="$PROJECT_DIR$/models/Profile.js" />
         <option value="$PROJECT_DIR$/config/db.js" />
+        <option value="$PROJECT_DIR$/config/default.json" />
         <option value="$PROJECT_DIR$/routes/api/profile.js" />
       </list>
     </option>
@@ -163,6 +174,11 @@
             <path>
               <item name="devxten2" type="b2602c69:ProjectViewProjectNode" />
               <item name="devxten2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="devxten2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="devxten2" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="devxten2" type="b2602c69:ProjectViewProjectNode" />
@@ -209,12 +225,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1562092248067</updated>
-      <workItem from="1562092249797" duration="25397000" />
+      <workItem from="1562092249797" duration="27186000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25397000" />
+    <option name="totallyTimeSpent" value="27186000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="759" y="85" width="919" height="877" extended-state="0" />
@@ -223,7 +239,7 @@
       <window_info id="Project Explorer" />
       <window_info id="Job Explorer" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24764891" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24721603" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Console" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
@@ -279,13 +295,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="19" column="29" lean-forward="true" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/default.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -345,10 +354,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/default.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/profile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1249">
-          <caret line="342" lean-forward="true" selection-start-line="342" selection-end-line="342" />
+        <state relative-caret-position="534">
+          <caret line="376" column="19" lean-forward="true" selection-start-line="376" selection-start-column="19" selection-end-line="376" selection-end-column="19" />
         </state>
       </provider>
     </entry>
