@@ -82,7 +82,7 @@ router.get('/:id', auth, async (req, res) => {
 // @access    Private
 router.delete('/:id', auth, async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id); // sort by most recent date
+        const post = await Post.findById(req.params.id);
         if (!post) {
             return res.status(404).json({ msg: 'Post not found' })
         }
@@ -102,6 +102,64 @@ router.delete('/:id', auth, async (req, res) => {
         if (err.kind === 'ObjectId') {
             return res.status(404).json({ msg: 'Post not found' })
         }
+        res.status(500).send('server error')
+    }
+});
+
+// @route     PUT api/posts/like/:id ---
+// @desc      like a post --  by post ID
+// @access    Private
+router.put('/like/:id', auth, async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id); // find the post first, then do likes
+
+        //  check to see if post has been liked by this user already
+        // likes is an array of the users who have liked it??
+        if (post.likes.filter(like => like.user.toString() === req.user.id).length > 0 ) {
+            return res.status(400).json({ msg: 'post already liked' })
+        }
+
+        post.likes.unshift({ user: req.user.id });
+
+        await post.save();
+
+        res.json(post.likes);  // return the likes, not the object
+
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('server error')
+    }
+});
+
+
+// @route     PUT api/posts/unlike/:id ---
+// @desc      UN-like a post --  by post ID
+// @access    Private
+router.put('/unlike/:id', auth, async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id); // find the post first, then do likes
+
+        //  check to see if post has been liked by this user already
+        // likes is an array of the users who have liked it??
+        if (post.likes.filter(like => like.user.toString() === req.user.id).length === 0 ) {
+            return res.status(400).json({ msg: 'Post has not been liked yet' })
+        }
+
+        // get remove index
+        const removeIndex = post.likes
+            .map(like => like.user.toString())
+            .indexOf(req.user.id);
+
+        // once we hve the index, use it in splice to remove that experience from the profile
+        post.likes.splice(removeIndex, 1);
+
+        // save the profile and return whole profile again.
+        await post.save();
+        res.json(post.likes);
+
+
+    } catch(err) {
+        console.error(err.message);
         res.status(500).send('server error')
     }
 });
