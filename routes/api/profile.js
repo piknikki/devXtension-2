@@ -169,5 +169,189 @@ router.delete("/", auth, async (req, res) => {
     }
 });
 
+// @route     PUT api/profile/experience
+// @desc      add experience to the profile
+// @access    Private
+// will have a form on react, and title and company will both be required, so need to put them
+//    into the auth array to make sure they're required
+router.put("/experience",
+    [auth, [
+        check('title', 'Title is required')
+            .not()
+            .isEmpty(),
+        check('company', 'Company is required')
+            .not()
+            .isEmpty()
+        ]
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);  // validation results
+        if(!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        // destructuring to pull out of req.body
+        const {
+            title,
+            company,
+            location,
+            from,
+            to,
+            current,
+            description
+        } = req.body;
+
+        // create an object out of hte data the user submits
+        const newExp = {
+            title,
+            company,
+            location,
+            from,
+            to,
+            current,
+            description
+        }
+
+        try {
+            // get the profile we're adding to
+            const profile = await Profile.findOne({ user: req.user.id });
+
+            profile.experience.unshift(newExp); // use unshift to put this at the beginning
+
+            await profile.save(); // save it
+
+            res.json(profile); // return whole profile
+
+        } catch (error) {
+            console.error(err.message);
+            res.status(500).send('server error')
+        }
+});
+
+// @route     DELETE api/profile/experience/:exp_id -- could be put, but since removing data, make it a delete
+// @desc      delete specific experience from the profile
+// @access    Private
+router.delete('/experience/:exp_id', auth, async (req, res) => {
+    try {
+        // get the profile of the user
+        const profile = await Profile.findOne({ user: req.user.id });
+        if (!profile) {
+            return res.status(400).send('no profile found');
+        }
+
+        // get index of what needs to be removed
+        const removeIndex = profile.experience
+            .map(item => item.id)
+            .indexOf(req.params.exp_id);
+
+        // once we hve the index, use it in splice to remove that experience from the profile
+        profile.experience.splice(removeIndex, 1);
+
+        // save the profile and return whole profile again.
+        await profile.save();
+        res.json(profile);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('server error')
+        
+    }
+});
+
+
+
+
+
+// @route     PUT api/profile/education
+// @desc      add education to the profile
+// @access    Private
+router.put("/education",
+    [auth, [
+        check('school', 'school is required')
+            .not()
+            .isEmpty(),
+        check('degree', 'degree is required')
+            .not()
+            .isEmpty(),
+        check('fieldofstudy', 'field of study is required')
+            .not()
+            .isEmpty()
+    ]
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);  // validation results
+        if(!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        // destructuring to pull out of req.body
+        const {
+            school,
+            degree,
+            fieldofstudy,
+            from,
+            to,
+            current,
+            description
+        } = req.body;
+
+        // create an object out of hte data the user submits
+        const newEdu = {
+            school,
+            degree,
+            fieldofstudy,
+            from,
+            to,
+            current,
+            description
+        }
+
+        try {
+            // get the profile we're adding to
+            const profile = await Profile.findOne({ user: req.user.id });
+
+            profile.education.unshift(newEdu); // use unshift to put this at the beginning
+
+            await profile.save(); // save it
+
+            res.json(profile); // return whole profile
+
+        } catch (error) {
+            console.error(err.message);
+            res.status(500).send('server error')
+        }
+    });
+
+// @route     DELETE api/profile/education/:edu_id -- could be put, but since removing data, make it a delete
+// @desc      delete specific education from the profile
+// @access    Private
+router.delete('/education/:edu_id', auth, async (req, res) => {
+    try {
+        // get the profile of the user
+        const profile = await Profile.findOne({ user: req.user.id });
+        if (!profile) {
+            return res.status(400).send('no profile found');
+        }
+
+        // get index of what needs to be removed
+        const removeIndex = profile.education
+            .map(item => item.id)
+            .indexOf(req.params.edu_id);
+
+        // once we hve the index, use it in splice to remove that education from the profile
+        profile.education.splice(removeIndex, 1);
+
+        // save the profile and return whole profile again.
+        await profile.save();
+        res.json(profile);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('server error')
+
+    }
+});
+
+
 
 module.exports = router;
