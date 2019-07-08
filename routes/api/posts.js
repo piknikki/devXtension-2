@@ -2,12 +2,46 @@
 
 const express = require('express');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
+const auth = require('../../middleware/auth');
+const Profile = require('../../models/Profile');
+const User = require('../../models/User');
+const Post = require('../../models/Post');
 
-// @route     GET api/posts ---
-// @desc      Test route ---
-// @access    Public  --- no token
-router.get('/', (req, res) => {
-    res.send('Posts route')
-});
+// @route     POST api/posts ---
+// @desc      route to create posts
+// @access    Public
+router.post('/',[
+    auth,
+    check('text', 'text is required')
+        .not()
+        .isEmpty()
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({errors: errors.array()})
+        }
+
+        try {
+            // brings in all the user information
+            const user = await User.findById(req.user.id).select('-password');
+
+            const newPost = new Post({
+                text: req.body.text,
+                name: user.name,
+                avatar: user.avatar,
+                user: req.user.id
+            })
+
+            const post = await newPost.save(); // can send as response
+
+            res.json(post);
+        } catch(err) {
+            console.error(err.message);
+            res.status(500).send('server error')
+        }
+    }
+);
 
 module.exports = router;
