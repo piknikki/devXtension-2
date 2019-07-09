@@ -1,4 +1,6 @@
 import React, { Fragment, useState } from 'react';
+import {Link} from 'react-router-dom';
+// import axios from 'axios';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -15,14 +17,17 @@ const Register = () => {
     // need this for every field
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
 
         // useState hook allows all state values to be accessible anywhere. no need to pass it in.
         if (password !== password2) {
             console.log("passwords do not match");
         } else {
-            console.log(formData);
+
+            console.log("success")
+
+
         }
     }
 
@@ -78,7 +83,7 @@ const Register = () => {
                    <input type="submit" className="btn btn-primary" value="Register"/>
                </form>
                <p className="my-1">
-                   Already have an account? <a href="login.html">Sign In</a>
+                   Already have an account? <Link to="/login">Sign In</Link>
                </p>
 
        </Fragment>
@@ -98,4 +103,30 @@ export default Register;
 //     }
 // }
 //      setFormData is equivalent to this.setState() with new values passed in
+
+
+// const newUser = {
+//     name, email, password
+// }
+
+// try {
+//     const config = {
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     }
+//
+//     // send the body
+//     const body = JSON.stringify(newUser);
+//
+//     // axios returns a promise -- this hits routes/users.js on the back end, to get a token back
+//     // params for axios.post are the route, what to send, and the config
+//     const res = await axios.post('/api/users', body, config);
+//
+//     // response data is the token we get back from sending the post request
+//     console.log(res.data);
+//
+// } catch (err) {
+//     console.error(err.response.data);
+// }
 
