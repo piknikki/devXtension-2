@@ -20,6 +20,7 @@
       <change beforePath="$PROJECT_DIR$/../../../Tutoring/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Tutoring/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Tutoring/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Tutoring/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Tutoring/story/chapter1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/posts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../reproductions/css/1024.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../reproductions/css/480.css" beforeDir="false" />
@@ -73,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/api/posts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="157" column="29" lean-forward="true" selection-start-line="157" selection-start-column="29" selection-end-line="157" selection-end-column="29" />
+            <state relative-caret-position="1152">
+              <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
             </state>
           </provider>
         </entry>
@@ -209,12 +210,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1562092248067</updated>
-      <workItem from="1562092249797" duration="33353000" />
+      <workItem from="1562092249797" duration="35270000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33353000" />
+    <option name="totallyTimeSpent" value="35270000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="759" y="85" width="919" height="877" extended-state="0" />
@@ -228,7 +229,7 @@
       <window_info anchor="bottom" id="Console" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.27218226" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.27218226" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -354,8 +355,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/posts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="157" column="29" lean-forward="true" selection-start-line="157" selection-start-column="29" selection-end-line="157" selection-end-column="29" />
+        <state relative-caret-position="1152">
+          <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
         </state>
       </provider>
     </entry>
