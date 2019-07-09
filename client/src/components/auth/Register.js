@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
-// import axios from 'axios';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = ({ setAlert }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -22,12 +24,9 @@ const Register = () => {
 
         // useState hook allows all state values to be accessible anywhere. no need to pass it in.
         if (password !== password2) {
-            console.log("passwords do not match");
+            setAlert("passwords do not match", "danger"); // this gets passed as a message to the action, uses css danger
         } else {
-
             console.log("success")
-
-
         }
     }
 
@@ -90,7 +89,19 @@ const Register = () => {
     )
 };
 
-export default Register;
+//
+Register.propTypes = {
+    setAlert: PropTypes.func.isRequired
+}
+// takes two params:  state and object with actions
+// allows us to access props.setalert
+export default connect(null, { setAlert })(Register);
+
+
+
+
+
+
 
 // not using hooks, would look like this:
 //
@@ -105,6 +116,9 @@ export default Register;
 //      setFormData is equivalent to this.setState() with new values passed in
 
 
+
+
+// import axios from 'axios';
 // const newUser = {
 //     name, email, password
 // }
