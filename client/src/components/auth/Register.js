@@ -2,9 +2,10 @@ import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { register } from "../../actions/auth";
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -26,7 +27,8 @@ const Register = ({ setAlert }) => {
         if (password !== password2) {
             setAlert("passwords do not match", "danger"); // this gets passed as a message to the action, uses css danger
         } else {
-            console.log("success")
+            // console.log("success");
+            register({ name, email, password }); // using the params pulled out of component state formData
         }
     }
 
@@ -41,7 +43,7 @@ const Register = ({ setAlert }) => {
                            placeholder="Name"
                            name="name"
                            value={name}
-                           required
+                           // required
                            onChange={e => onChange(e)}
                        />
                    </div>
@@ -64,7 +66,7 @@ const Register = ({ setAlert }) => {
                            type="password"
                            placeholder="Password"
                            name="password"
-                           minLength="6"
+                           // minLength="6"
                            value={password}
                            onChange={e => onChange(e)}
                        />
@@ -74,7 +76,7 @@ const Register = ({ setAlert }) => {
                            type="password"
                            placeholder="Confirm Password"
                            name="password2"
-                           minLength="6"
+                           // minLength="6"
                            value={password2}
                            onChange={e => onChange(e)}
                        />
@@ -91,11 +93,15 @@ const Register = ({ setAlert }) => {
 
 //
 Register.propTypes = {
-    setAlert: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
 }
 // takes two params:  state and object with actions
 // allows us to access props.setalert
-export default connect(null, { setAlert })(Register);
+export default connect(
+    null,
+    { setAlert, register }
+    )(Register);
 
 
 

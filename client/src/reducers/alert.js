@@ -21,18 +21,3 @@ export default function(state = initialState, action) {
     }
 };
 
-
-
-
-
-
-
-
-// example of initial set up
-// const initialState = [
-//     {
-//         id: 1,
-//         msg: "please log in",
-//         alertType: 'success'
-//     }
-// ]
