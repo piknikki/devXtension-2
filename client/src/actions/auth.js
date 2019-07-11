@@ -4,7 +4,9 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     USER_LOADED,
-    AUTH_ERROR
+    AUTH_ERROR,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL
 } from "./types";
 import setAuthToken from '../utils/setAuthToken';
 
@@ -51,7 +53,11 @@ export const register = ({ name, email, password }) => async dispatch => {
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data // res.data is the response we get back, which is the token
-        })
+        });
+
+        dispatch(loadUser());
+
+
     } catch (err) {
         const errors = err.response.data.errors;
 
@@ -62,6 +68,41 @@ export const register = ({ name, email, password }) => async dispatch => {
         }
         dispatch({
             type: REGISTER_FAIL // REGISTER_FAIL doesn't do anything with a payload in the reducer, so don't need it here
+        });
+    }
+};
+
+// login user
+export const login = (email, password) => async dispatch => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    const body = JSON.stringify({ email, password }); // prepare data to send
+
+    try {
+        const res = await axios.post('/api/auth', body, config);
+
+        // if all goes well, dispatch the REGISTER_SUCCESS
+        dispatch({
+            type: LOGIN_SUCCESS,
+            payload: res.data // res.data is the response we get back, which is the token
+        });
+
+        dispatch(loadUser());
+
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        // if there are errors, for every error, send the message in the danger css style
+        // this references the setAlert in the alert.js reducer file
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        }
+        dispatch({
+            type: LOGIN_FAIL // REGISTER_FAIL doesn't do anything with a payload in the reducer, so don't need it here
         })
     }
 
