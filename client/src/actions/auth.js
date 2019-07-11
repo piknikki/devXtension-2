@@ -6,7 +6,8 @@ import {
     USER_LOADED,
     AUTH_ERROR,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    LOGOUT
 } from "./types";
 import setAuthToken from '../utils/setAuthToken';
 
@@ -105,5 +106,9 @@ export const login = (email, password) => async dispatch => {
             type: LOGIN_FAIL // REGISTER_FAIL doesn't do anything with a payload in the reducer, so don't need it here
         })
     }
+};
 
-}
+// Logout / clear profile
+export const logout = () => dispatch => {
+    dispatch({ type: LOGOUT });
+};
