@@ -101,7 +101,7 @@ export const login = (email, password) => async dispatch => {
         // if there are errors, for every error, send the message in the danger css style
         // this references the setAlert in the alert.js reducer file
         if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
         }
         dispatch({
             type: LOGIN_FAIL // REGISTER_FAIL doesn't do anything with a payload in the reducer, so don't need it here
