@@ -100,7 +100,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
             headers: {
                 'Content-Type': 'application/json'
             }
-        }
+        };
 
         const res = await axios.post('/api/profile', formData, config);
 
@@ -142,7 +142,7 @@ export const addExperience = (formData, history) => async dispatch => {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }
+        };
 
         const res = await axios.put('/api/profile/experience', formData, config);
 
@@ -183,7 +183,7 @@ export const addEducation = (formData, history) => async dispatch => {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }
+        };
 
         const res = await axios.put('/api/profile/education', formData, config);
 
@@ -275,7 +275,7 @@ export const deleteAccount = () => async dispatch => {
 
     if (window.confirm("Are you sure?  This can NOT be undone.")) {
         try {
-            const res = await axios.delete('/api/profile');
+            await axios.delete('/api/profile');
 
             dispatch({ type: CLEAR_PROFILE });
             dispatch({ type: ACCOUNT_DELETED });
