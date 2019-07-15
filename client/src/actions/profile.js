@@ -3,7 +3,8 @@ import { setAlert } from "./alert";
 
 import {
     GET_PROFILE,
-    PROFILE_ERROR
+    PROFILE_ERROR,
+    UPDATE_PROFILE
 } from "./types";
 
 //  Get current users profile
@@ -66,6 +67,88 @@ export const createProfile = (formData, history, edit = false) => async dispatch
         dispatch({
             type: PROFILE_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status }
-        })
+        });
     }
-}
+};
+
+//  add experience
+export const addExperience = (formData, history) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.put('/api/profile/experience', formData, config);
+
+        // dispatch reducer to get profile
+        // token has user id
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+
+        // need alert that says profile was update or profile was created
+        // if edited, show updated, else show created
+        dispatch(setAlert('Experience added', 'success'));
+
+        history.push('/dashboard');
+
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        // if there are errors, for every error, send the message in the danger css style
+        // this references the setAlert in the alert.js reducer file
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+
+//  add education
+export const addEducation = (formData, history) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.put('/api/profile/education', formData, config);
+
+        // dispatch reducer to get profile
+        // token has user id
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+
+        // need alert that says profile was update or profile was created
+        // if edited, show updated, else show created
+        dispatch(setAlert('Education added', 'success'));
+
+        history.push('/dashboard');
+
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        // if there are errors, for every error, send the message in the danger css style
+        // this references the setAlert in the alert.js reducer file
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
