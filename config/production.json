@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://adminnikki:adminnikki@devxtension-2y520.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "kittensinmittens",
+    "githubClientId": "fba1afc6b6edeb19b182",
+    "githubClientSecret": "9f5876254b7422e2ed63cb9e05ffa120436cb46e"
+}
