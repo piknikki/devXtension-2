@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {getPosts} from "../../actions/post";
 import PostItem from './PostItem';
+import PostForm from './PostForm';
 import Spinner from '../layout/Spinner';
 
 //  loading page will fetch post from api and put it into state
@@ -21,7 +22,9 @@ const Posts = ({
             <p className="lead">
                 <i className="fas fa-user"></i>Welcome to the community
             </p>
-            {/*PostForm*/}
+
+            <PostForm />
+
             <div className="posts">
                 {posts.map(post => (
                     <PostItem key={post._id} post={post} />
