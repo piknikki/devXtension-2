@@ -29,4 +29,4 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-app.listen(process.env.PORT || 5000, () => console.log("server started on port process.env or 5000"));  // listen to port
+app.listen(process.env.PORT || 5000);  // listen to port
