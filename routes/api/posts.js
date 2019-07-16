@@ -4,9 +4,10 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
+
+const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-const Post = require('../../models/Post');
 
 // @route     POST api/posts ---
 // @desc      route to create posts
@@ -167,11 +168,14 @@ router.put('/unlike/:id', auth, async (req, res) => {
 // @route     POST api/posts/comment/:id ---
 // @desc      comment on a post
 // @access    Private
-router.post('/comment/:id',[
+router.post('/comment/:id',
+    [
         auth,
-        check('text', 'text is required')
-            .not()
-            .isEmpty()
+        [
+            check('text', 'Text is required')
+                .not()
+                .isEmpty()
+        ]
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -196,7 +200,7 @@ router.post('/comment/:id',[
             await post.save();
 
             res.json(post.comments);
-        } catch(err) {
+        } catch (err) {
             console.error(err.message);
             res.status(500).send('server error')
         }
@@ -220,24 +224,22 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
 
         // check user
         if (comment.user.toString() !== req.user.id) {
-            return res.status(401).json({ msg: "User not authorized" })
+            return res.status(401).json({ msg: "User not authorized" });
         }
 
-        // find index of comment
+        // Get remove index
         const removeIndex = post.comments
-            .map(comment => comment.user.toString())
-            .indexOf(req.user.id);
+            .map(comment => comment.id)
+            .indexOf(req.params.comment_id);
 
-        // once we hve the index, use it in splice to remove that experience from the profile
         post.comments.splice(removeIndex, 1);
 
-        // save the profile and return whole profile again.
         await post.save();
-        res.json(post.comments);
 
-    } catch(err) {
+        res.json(post.comments);
+    } catch (err) {
         console.error(err.message);
-        res.status(500).send('server error')
+        res.status(500).send('Server Error');
     }
 });
 
