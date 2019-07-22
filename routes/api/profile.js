@@ -359,7 +359,8 @@ router.get('/github/:username', async (req, res) => {
     try {
         const options = {
             uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&
-            sort=created:asc&
+            sort=updated&
+            direction=desc&
             client_id=${config.get('githubClientId')}&
             client_secret=${config.get("githubClientSecret")}`,
             method: 'GET',
